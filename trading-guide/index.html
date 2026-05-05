@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From Vision to Execution — Trader's Field Guide</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f5f4f0;
+    color: #1a1a1a;
+    padding: 2rem 1rem;
+  }
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  /* Back Button */
+  .back-btn {
+    display: inline-block;
+    margin-bottom: 2rem;
+    padding: 0.5rem 1rem;
+    background: #667eea;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: background 0.3s ease;
+  }
+  .back-btn:hover { background: #764ba2; }
+
+  /* Hero */
+  .hero {
+    padding: 2rem;
+    background: #eeecea;
+    border-radius: 12px;
+    border: 0.5px solid #d3d1c7;
+    margin-bottom: 2rem;
+  }
+  .hero-label {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: #888780;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .hero-title {
+    font-size: 24px;
+    font-weight: 500;
+    color: #1a1a1a;
+    line-height: 1.3;
+    margin-bottom: 0.75rem;
+  }
+  .hero-subtitle {
+    font-size: 15px;
+    color: #5f5e5a;
+    line-height: 1.7;
+  }
+
+  /* Sections */
+  .section { margin-bottom: 2rem; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+  }
+  .section-num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: #E6F1FB;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 500; color: #0C447C;
+    flex-shrink: 0;
+  }
+  .section-title { font-size: 16px; font-weight: 500; color: #1a1a1a; }
+  .prose {
+    font-size: 14px; color: #5f5e5a;
+    line-height: 1.8; margin-bottom: 1rem;
+  }
+
+  /* Cards */
+  .card {
+    background: #ffffff;
+    border: 0.5px solid #d3d1c7;
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+  }
+  .card-label {
+    font-size: 12px; font-weight: 500; color: #888780;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    margin-bottom: 0.75rem;
+  }
+
+  /* Callout */
+  .callout {
+    background: #E6F1FB;
+    border-left: 3px solid #185FA5;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+    border-radius: 0 8px 8px 0;
+  }
+  .callout-title {
+    font-size: 12px; font-weight: 500; color: #185FA5;
+    margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .callout-body { font-size: 13px; color: #0C447C; line-height: 1.7; }
+  .callout-warn { background: #FAEEDA; border-left-color: #BA7517; }
+  .callout-warn .callout-title { color: #854F0B; }
+  .callout-warn .callout-body { color: #633806; }
+
+  /* Divider */
+  hr { border: none; border-top: 0.5px solid #d3d1c7; margin: 1.5rem 0; }
+
+  /* Table */
+  .table-wrap { overflow-x: auto; margin-bottom: 1rem; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th {
+    text-align: left; padding: 8px 12px;
+    color: #5f5e5a; font-weight: 500;
+    border-bottom: 0.5px solid #d3d1c7;
+    background: #f5f4f0;
+  }
+  td {
+    padding: 8px 12px; color: #1a1a1a;
+    border-bottom: 0.5px solid #e8e6e0;
+    vertical-align: top; line-height: 1.6;
+  }
+  tr:last-child td { border-bottom: none; }
+
+  /* Badges */
+  .badge {
+    display: inline-block; font-size: 11px;
+    padding: 3px 8px; border-radius: 999px; font-weight: 500;
+  }
+  .badge-blue  { background: #E6F1FB; color: #0C447C; }
+  .badge-amber { background: #FAEEDA; color: #633806; }
+  .badge-red   { background: #FCEBEB; color: #791F1F; }
+  .badge-green { background: #EAF3DE; color: #27500A; }
+
+  /* Steps */
+  .steps { list-style: none; counter-reset: steps; }
+  .steps li {
+    counter-increment: steps;
+    display: flex; gap: 12px;
+    margin-bottom: 0.75rem;
+    font-size: 14px; color: #5f5e5a; line-height: 1.7;
+  }
+  .steps li::before {
+    content: counter(steps);
+    min-width: 22px; height: 22px;
+    border-radius: 50%; border: 0.5px solid #b4b2a9;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 500; color: #1a1a1a;
+    flex-shrink: 0; margin-top: 2px;
+  }
+
+  /* Macro grid */
+  .macro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1rem; }
+  .macro-card {
+    border: 0.5px solid #d3d1c7;
+    border-radius: 8px; padding: 0.75rem 1rem;
+    background: #ffffff;
+  }
+  .macro-time { font-size: 12px; font-weight: 500; color: #185FA5; margin-bottom: 0.3rem; }
+  .macro-desc { font-size: 13px; color: #5f5e5a; line-height: 1.5; }
+
+  /* Checklist */
+  .checklist { list-style: none; }
+  .checklist li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 14px; color: #5f5e5a;
+    padding: 6px 0; border-bottom: 0.5px solid #e8e6e0; line-height: 1.6;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .check-icon {
+    width: 18px; height: 18px; border-radius: 4px;
+    background: #EAF3DE; border: 0.5px solid #97C459;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .check-mark {
+    width: 8px; height: 5px;
+    border-left: 1.5px solid #3B6D11; border-bottom: 1.5px solid #3B6D11;
+    transform: rotate(-45deg) translateY(-1px);
+  }
+
+  /* Quote */
+  .quote-block {
+    border-left: 3px solid #b4b2a9;
+    padding: 0.75rem 1.25rem; margin: 1rem 0;
+  }
+  .quote-text {
+    font-size: 14px; color: #5f5e5a;
+    line-height: 1.8; font-style: italic;
+  }
+
+  /* Comparison */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .comp-card { border: 0.5px solid #d3d1c7; border-radius: 8px; padding: 0.75rem 1rem; }
+  .comp-card.pro  { border-color: #3B6D11; background: #EAF3DE; }
+  .comp-card.gambler { border-color: #A32D2D; background: #FCEBEB; }
+  .comp-label { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.5rem; }
+  .comp-label.pro     { color: #27500A; }
+  .comp-label.gambler { color: #791F1F; }
+  .comp-row { font-size: 13px; margin-bottom: 0.4rem; line-height: 1.6; }
+  .comp-row .attr { color: #888780; font-size: 11px; display: block; margin-bottom: 1px; }
+  .comp-row .val-pro     { color: #27500A; }
+  .comp-row .val-gambler { color: #791F1F; }
+
+  /* Closing */
+  .closing {
+    border-top: 0.5px solid #d3d1c7;
+    padding-top: 1.5rem; margin-top: 0.5rem; text-align: center;
+  }
+  .closing-text { font-size: 14px; color: #5f5e5a; line-height: 1.8; margin-bottom: 0.5rem; }
+  .closing-sig  { font-size: 13px; color: #888780; }
+
+  b, strong { font-weight: 500; color: #1a1a1a; }
+
+  @media (max-width: 520px) {
+    .macro-grid, .two-col { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <a href="/SMC_intern/" class="back-btn">← Back to Home</a>
+
+  <div class="hero">
+    <div class="hero-label">Trader's Field Guide</div>
+    <div class="hero-title">From Vision to Execution:<br>An Illustrated Guide to the Market's Cinematic Narrative</div>
+    <div class="hero-subtitle">Market mastery is not about taking every shot — it's about specialising in the one shot that fits the script.</div>
+  </div>
+
+  <!-- Section 1 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-title">The Director's Vision: trading as future prediction</div>
+    </div>
+    <div class="prose">A professional trader does not merely watch the screen — they act as a <strong>Director</strong> casting a vision over the future. To speculate is to forecast the journey[...]
+    <div class="card">
+      <div class="card-label">Three Critical Uncertainties</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <span class="badge badge-amber">Outcome</span>
+          <span style="font-size:13px;color:#5f5e5a;line-height:1.6;padding-top:2px">No absolute control over the result of any single trade, regardless of setup quality.</span>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <span class="badge badge-red">Reversal</span>
+          <span style="font-size:13px;color:#5f5e5a;line-height:1.6;padding-top:2px">Cannot know with 100% certainty if the next candle will introduce a sharp change in direction.</span>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <span class="badge badge-blue">Stagnation</span>
+          <span style="font-size:13px;color:#5f5e5a;line-height:1.6;padding-top:2px">Price may flatline, refusing to move and leaving capital in narrative limbo.</span>
+        </div>
+      </div>
+    </div>
+    <div class="prose">Experience bridges these uncertainties. Over time, the student develops a "knack" for the pulse of price action, moving from blind guesswork to scripted, precision executio[...]
+  </div>
+
+  <hr>
+
+  <!-- Section 2 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-title">The Cast of Characters: personifying the candlesticks</div>
+    </div>
+    <div class="prose">To read a chart is to understand the roles played by each candle. Some carry the weight of the plot, while others are merely background noise.</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Role</th><th>Description</th><th>Market equivalent</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge-blue">Leading</span></td>
+            <td>Primary drivers; create major shifts in intent.</td>
+            <td>Displacement and Fair Value Gaps (FVGs)</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-green">Supporting</span></td>
+            <td>Validate the leads, confirming the story remains on track.</td>
+            <td>Retracements; candles respecting CE or 50% level of leading gaps</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-amber">Extras</span></td>
+            <td>No impact on storyline; provide "noise."</td>
+            <td>Consolidation and jagged, non-directional price action</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout">
+      <div class="callout-title">The Leading Role: First Presented FVG</div>
+      <div class="callout-body">The most critical character is the <strong>First Presented Fair Value Gap (FVG)</strong> forming immediately after a liquidity raid (Turtle Soup). This gap is the [...]<br><br><strong>The 20-Day Rule:</strong> Once identified, project this level forward on your chart and keep it for 20 days. It remains a viable anchor for the algorithmic script long after its ini[...]\n    </div>\n  </div>\n\n  <hr>\n\n  <!-- Section 3 -->\n  <div class=\"section\">\n    <div class=\"section-header\">\n      <div class=\"section-num\">3</div>\n      <div class=\"section-title\">The Plot's Magnet: mastering the Draw on Liquidity</div>\n    </div>\n    <div class=\"prose\">Price does not wander aimlessly; it is magnetically drawn to specific pools of liquidity. The most frequent targets are the <strong>Overnight Low</strong> (formed 12:00 AM [...]</div>\n    <div class=\"card\">\n      <div class=\"card-label\">Search Protocol for Liquidity</div>\n      <ol class=\"steps\">\n        <li><strong>Identify the Overnight Range.</strong> Mark highs and lows established between 12:00 AM and 7:00 AM ET.</li>\n        <li><strong>Locate the Magnet.</strong> Look for the \"lowest low\" or Relative Equal Lows (right low slightly higher than left).</li>\n        <li><strong>Cast the Vision.</strong> Determine if the market has a scripted reason to reach for this liquidity pool.</li>\n      </ol>\n    </div>\n    <div class=\"quote-block\">\n      <div class=\"quote-text\">\"If the draw is not clear, the instruction is to do nothing. It is liberating to accept that there will be times when you simply do not know. If the script is missin[...]\n    </div>\n  </div>\n\n  <hr>\n\n  <!-- Section 4 -->\n  <div class=\"section\">\n    <div class=\"section-header\">\n      <div class=\"section-num\">4</div>\n      <div class=\"section-title\">Scene 1: the Opening Act and Displacement</div>\n    </div>\n    <div class=\"prose\">The window between <strong>9:30 AM – 10:00 AM ET</strong> is the market's opening act. This is where the algorithm reveals its intent through a Turtle Soup maneuver follo[...]</div>\n    <div class=\"card\">\n      <div class=\"card-label\" style=\"color:#791F1F\">Signatures of a Bearish Shift</div>\n      <ul class=\"checklist\">\n        <li>\n          <div class=\"check-icon\"><div class=\"check-mark\"></div></div>\n          <span><strong>Turtle Soup:</strong> A raid on a previous high that immediately fails and reverses.</span>\n        </li>\n        <li>\n          <div class=\"check-icon\"><div class=\"check-mark\"></div></div>\n          <span><strong>Long Black Limousines:</strong> Elongated downward-closing candlesticks signalling speed and institutional intent.</span>\n        </li>\n        <li>\n          <div class=\"check-icon\"><div class=\"check-mark\"></div></div>\n          <span><strong>CIBBI:</strong> Formation of a Sell-side Imbalance Buy-side Inefficiency — a bearish FVG.</span>\n        </li>\n      </ul>\n    </div>\n  </div>\n\n  <hr>\n\n  <!-- Section 5 -->\n  <div class=\"section\">\n    <div class=\"section-header\">\n      <div class=\"section-num\">5</div>\n      <div class=\"section-title\">Scripted Timing: Macros and the Rhythm of Price</div>\n    </div>\n    <div class=\"prose\">Price delivery is a derivative of time. The algorithm is scripted to trigger displacement or reach for the Draw during specific \"Macro\" windows.</div>\n    <div class=\"macro-grid\">\n      <div class=\"macro-card\">\n        <div class=\"macro-time\">9:50 AM – 10:10 AM ET</div>\n        <div class=\"macro-desc\">Triggers the first major displacement or a return to an FVG after opening volatility.</div>\n      </div>\n      <div class=\"macro-card\">\n        <div class=\"macro-time\">10:50 AM – 11:10 AM ET</div>\n        <div class=\"macro-desc\">Accelerates the move or finalises delivery toward the Draw on Liquidity.</div>\n      </div>\n    </div>\n    <div class=\"callout callout-warn\">\n      <div class=\"callout-title\">Avoid: the Lunch Macro (11:30 AM – 1:30 PM ET)</div>\n      <div class=\"callout-body\">This period is characterised by \"chop\" and false signals that lack narrative clarity. Time Distortion overrides market structure — when a Macro window opens, the[...]\n    </div>\n  </div>\n\n  <hr>\n\n  <!-- Section 6 -->\n  <div class=\"section\">\n    <div class=\"section-header\">\n      <div class=\"section-num\">6</div>\n      <div class=\"section-title\">The Director's Cut: the Daily Chart and Suspension Block</div>\n    </div>\n    <div class=\"prose\">Top-down analysis is the non-negotiable foundation of professional trading. Without the Daily Chart, you are trading blind.</div>\n    <div class=\"card\">\n      <div class=\"card-label\">ICT Suspension Block — 3-step checklist</div>\n      <ol class=\"steps\">\n        <li><strong>Identify.</strong> Locate the Suspension Block on the Daily timeframe, specifically the volume imbalance framing the open and close of the candles.</li>\n        <li><strong>Note Consequent Encroachment.</strong> Mark the midpoint (50%) of the block as a high-sensitivity level.</li>\n        <li><strong>Observe Reactions.</strong> Monitor how 1-minute price action reacts to Daily levels — does the lower timeframe respect the CE, or use the block as a launchpad?</li>\n      </ol>\n    </div>\n  </div>\n\n  <hr>\n\n  <!-- Section 7 -->\n  <div class=\"section\">\n    <div class=\"section-header\">\n      <div class=\"section-num\">7</div>\n      <div class=\"section-title\">Final Synthesis: Narrative Trumps Structure</div>\n    </div>\n    <div class=\"prose\">Market structure is secondary to the overarching narrative. While the amateur looks for indicators, the professional looks for the storyline.</div>\n    <div class=\"two-col\">\n      <div class=\"comp-card pro\">\n        <div class=\"comp-label pro\">The Professional</div>\n        <div class=\"comp-row\"><span class=\"attr\">Primary tool</span><span class=\"val-pro\">Narrative based on time and price</span></div>\n        <div class=\"comp-row\"><span class=\"attr\">Patience</span><span class=\"val-pro\">Content to do nothing if vision is unclear</span></div>\n        <div class=\"comp-row\"><span class=\"attr\">Method</span><span class=\"val-pro\">Relentless backtesting; obsessed with the \"why\"</span></div>\n      </div>\n      <div class=\"comp-card gambler\">\n        <div class=\"comp-label gambler\">The Gambler</div>\n        <div class=\"comp-row\"><span class=\"attr\">Primary tool</span><span class=\"val-gambler\">Volume profiles, indicators, signals</span></div>\n        <div class=\"comp-row\"><span class=\"attr\">Patience</span><span class=\"val-gambler\">FOMO; feels forced to trade</span></div>\n        <div class=\"comp-row\"><span class=\"attr\">Method</span><span class=\"val-gambler\">Avoids backtesting; seeks shortcuts</span></div>\n      </div>\n    </div>\n  </div>\n\n  <div class=\"closing\">\n    <div class=\"closing-text\">Do not expect to arrive at the winner's circle in a self-driving car. You must be the one driving the plan, managing the risks, and interpreting the data. Return to the fundamentals.</div>\n    <div class=\"closing-sig\">Be safe. Stay disciplined. Trust the narrative.</div>\n  </div>\n\n</div>\n</body>\n</html>
